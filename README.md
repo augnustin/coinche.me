@@ -1,6 +1,5 @@
-# Coinche.ms
-
-Jouer aux cartes en ligne entre amis sans création de compte.
+# Coinche.me
+Jouer aux cartes en ligne entre amis sans création de compte. La version live est accessible depuis l'url: https://coinche.me/
 
 ## Comment jouer ?
 
