@@ -26,7 +26,7 @@
     "express-session": "^1.17.1",
     "ioredis": "^4.16.0",
     "lodash.get": "^4.4.2",
-    "marked": "^0.8.2",
+    "marked": "^4.0.10",
     "parcel-bundler": "^1.12.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
@@ -48,7 +48,7 @@
     "babel-plugin-wildcard": "^6.0.0",
     "concurrently": "^5.1.0",
     "jest": "^25.3.0",
-    "marked": "^0.8.2",
+    "marked": "^4.0.10",
     "nodemon": "^2.0.2",
     "sass": "^1.26.3"
   }
