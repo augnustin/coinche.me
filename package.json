@@ -22,7 +22,7 @@
     "cookie": "^0.4.0",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.1",
     "ioredis": "^4.16.0",
     "lodash.get": "^4.4.2",
