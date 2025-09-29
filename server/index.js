@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookie from 'cookie';
 import session from 'express-session';
-import socketio from 'socket.io';
+import { Server } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const server = http.Server(app);
-const io = socketio(server);
+const io = new Server(server);
 const isProduction = app.get('env') === 'production';
 const PORT = process.env.PORT || 3000;
 
@@ -51,7 +51,7 @@ const dispatchActionAndBroadcastNewState = async (tableId, action) => {
   const store = await getStore(tableId);
   store.dispatch(action);
   const state = store.getState().present;
-  return emitEachInRoom(io, tableId, socketEvents.UPDATED_STATE, socketId => subjectiveState({tableId, ...state}, socketId));
+  return await emitEachInRoom(io, tableId, socketEvents.UPDATED_STATE, socketId => subjectiveState({tableId, ...state}, socketId));
 }
 
 try {
@@ -61,16 +61,16 @@ try {
 
     socket.on(socketEvents.JOIN, async ({tableId, username}) => {
       socket.join(tableId);
-      dispatchActionAndBroadcastNewState(tableId, join({playerId, socketId: socket.id, playerName: username}))
+      await dispatchActionAndBroadcastNewState(tableId, join({playerId, socketId: socket.id, playerName: username}))
     })
 
     socket.on(socketEvents.DISPATCH, async ({tableId, action}) => {
-      dispatchActionAndBroadcastNewState(tableId, action)
+      await dispatchActionAndBroadcastNewState(tableId, action)
     });
 
     socket.on(socketEvents.LEAVE, async ({tableId}) => {
       socket.disconnect();
-      dispatchActionAndBroadcastNewState(tableId, leave(socket.id))
+      await dispatchActionAndBroadcastNewState(tableId, leave(socket.id))
     });
 
     socket.on(socketEvents.DISCONNECT, async () => {

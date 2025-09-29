@@ -1,4 +1,3 @@
-import get from 'lodash.get';
 import { createSelector } from 'reselect';
 import declarationTypes from '../../shared/constants/declarationTypes.js';
 import {last, partition} from '../../shared/utils/array.js';
@@ -13,7 +12,7 @@ export const selectCurrentDeclaration = createSelector(
 
 export const selectCurrentTrumpType = createSelector(
   [selectCurrentDeclaration],
-  currentDeclaration => get(currentDeclaration, 'trumpType')
+  currentDeclaration => currentDeclaration?.trumpType
 )
 
 export const selectIsCoinched = createSelector(
