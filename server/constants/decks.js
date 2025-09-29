@@ -1,4 +1,4 @@
-import {range} from '../../shared/utils/array';
+import {range} from '../../shared/utils/array.js';
 
 const colorLetters = ['C', 'D', 'H', 'S'];
 const headsLetters = ['J', 'Q', 'K', 'A'];

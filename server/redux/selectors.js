@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import { createSelector } from 'reselect';
-import declarationTypes from '../../shared/constants/declarationTypes';
-import {last, partition} from '../../shared/utils/array';
+import declarationTypes from '../../shared/constants/declarationTypes.js';
+import {last, partition} from '../../shared/utils/array.js';
 
 const selectDeclarationHistory = state => state.declarationsHistory;
 const selectPlayers = state => state.players;

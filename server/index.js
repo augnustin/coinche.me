@@ -5,12 +5,17 @@ import cookie from 'cookie';
 import session from 'express-session';
 import socketio from 'socket.io';
 import { v4 as uuid } from 'uuid';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-import getStore from './redux/store';
-import subjectiveState from './redux/subjectiveState';
-import {emitEachInRoom} from '../shared/utils/sockets';
-import {join, leave} from './redux/actions';
-import socketEvents from '../shared/constants/socketEvents';
+import getStore from './redux/store.js';
+import subjectiveState from './redux/subjectiveState.js';
+import {emitEachInRoom} from '../shared/utils/sockets.js';
+import {join, leave} from './redux/actions.js';
+import socketEvents from '../shared/constants/socketEvents.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const server = http.Server(app);

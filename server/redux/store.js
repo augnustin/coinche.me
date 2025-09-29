@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import rootReducer from './root-reducer';
-import undoReducer from './undoReducer';
+import rootReducer from './root-reducer.js';
+import undoReducer from './undoReducer.js';
+import Redis from 'ioredis';
 
 const INITIAL_STATE = {
   past: [],
@@ -9,7 +10,6 @@ const INITIAL_STATE = {
   futur: [],
 }
 
-const Redis = require('ioredis');
 const redisURL = "redis://redis";
 const redisInstance = new Redis(redisURL);
 

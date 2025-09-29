@@ -1,4 +1,4 @@
-import trumpTypes from '../../shared/constants/trumpTypes';
+import trumpTypes from '../../shared/constants/trumpTypes.js';
 
 const trumpScore = {
   "J": 20,

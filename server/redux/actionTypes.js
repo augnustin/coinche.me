@@ -1,4 +1,4 @@
-import sharedActionTypes from '../../shared/constants/actionsTypes';
+import sharedActionTypes from '../../shared/constants/actionsTypes.js';
 
 const actionTypes = {
   ...sharedActionTypes,

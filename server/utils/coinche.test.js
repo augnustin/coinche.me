@@ -1,6 +1,6 @@
-import { countTrick, countPlayerScore, sortHand, sortByType, hasBelote } from './coinche';
-import { DECK32 } from '../constants/decks';
-import trumpTypes from '../../shared/constants/trumpTypes';
+import { countTrick, countPlayerScore, sortHand, sortByType, hasBelote } from './coinche.js';
+import { DECK32 } from '../constants/decks.js';
+import trumpTypes from '../../shared/constants/trumpTypes.js';
 
 it('is counting a trick according to trump type', () => {
 	const trick = ['JH', '9C', '10D', 'AS'];

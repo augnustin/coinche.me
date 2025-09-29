@@ -1,26 +1,33 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Redirect } from 'react-router-dom';
-import { useBeforeunload } from 'react-beforeunload';
+import { Navigate, useParams } from 'react-router-dom';
 import { subscribeServerUpdate, unsubscribeServerUpdate } from '../redux/actions/socketActions';
 import {selectGameId} from '../redux/selectors/game'
 import Layout from '../components/Layout';
 import Game from '../components/Game';
 import {localStorageKeys} from '../constants';
 
-const GamePage = ({gameId, subscribeServerUpdate, unsubscribeServerUpdate, match: {params: {tableId}}}) => {
+const GamePage = ({gameId, subscribeServerUpdate, unsubscribeServerUpdate}) => {
+  const { tableId } = useParams();
   if (!tableId) return (
-    <Redirect to="/" />
+    <Navigate to="/" replace />
   );
   const username = localStorage.getItem(localStorageKeys.USERNAME);
   if (!username) return (
-    <Redirect to={`/?join=${tableId}`} />
+    <Navigate to={`/?join=${tableId}`} replace />
   );
 
-  useBeforeunload(() => {
-    unsubscribeServerUpdate(tableId)
-  });
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      unsubscribeServerUpdate(tableId);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [tableId, unsubscribeServerUpdate]);
 
   useEffect(() => {
     subscribeServerUpdate(tableId, username)

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import actionTypes from './actionTypes';
-import {DECK32} from '../constants/decks';
+import actionTypes from './actionTypes.js';
+import {DECK32} from '../constants/decks.js';
 import {
   sortHand,
   distributeCoinche,
@@ -8,19 +8,19 @@ import {
   countPlayerScore,
   hasBelote,
   gatherTricks,
-} from '../utils/coinche';
+} from '../utils/coinche.js';
 import {
   NO_DECLARATION,
   FINAL_DECLARATION,
   DECLARATIONS,
-} from '../../shared/constants/options';
-import {shuffle, first, nextIndex, switchIndexes, firstIndex} from '../../shared/utils/array';
+} from '../../shared/constants/options.js';
+import {shuffle, first, nextIndex, switchIndexes, firstIndex} from '../../shared/utils/array.js';
 import {
   selectCurrentDeclaration,
   selectIsCoinched,
   selectCurrentTrumpType,
   selectTeams,
-} from './selectors';
+} from './selectors.js';
 
 export const INITIAL_STATE = () => ({
   gameId: uuid(),

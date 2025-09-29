@@ -1,7 +1,7 @@
-import { DECK32 } from '../constants/decks';
-import trumpTypes from '../../shared/constants/trumpTypes';
-import gameScore from '../constants/gameScore';
-import { next, shift, randomIndex, shuffle } from '../../shared/utils/array';
+import { DECK32 } from '../constants/decks.js';
+import trumpTypes from '../../shared/constants/trumpTypes.js';
+import gameScore from '../constants/gameScore.js';
+import { next, shift, randomIndex, shuffle } from '../../shared/utils/array.js';
 
 export const sortHand = (hand, trumpType) => {
 

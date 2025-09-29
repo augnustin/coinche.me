@@ -1,4 +1,4 @@
-import {isNumber} from './boolean';
+import {isNumber} from './boolean.js';
 
 export const shuffle = a => {
   for (let i = a.length - 1; i > 0; i--) {
