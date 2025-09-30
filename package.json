@@ -13,7 +13,7 @@
     "dev": "concurrently \"npm run watch-app\" \"npm run watch-server\"",
     "build": "parcel build app/index.html --dist-dir build --public-url ./",
     "server": "node server/index.js",
-    "start": "npm run build && npm run server",
+    "start": "npm install && npm run build && npm run server",
     "test": "jest --watch *.test.js"
   },
   "dependencies": {
