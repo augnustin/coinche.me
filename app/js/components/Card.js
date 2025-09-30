@@ -8,8 +8,7 @@ import {localStorageKeys} from '../constants';
 
 import '../../scss/components/card.scss';
 
-// Can't use import, require needed :(
-const images = require('../../images/cards/*.svg');
+import images from '../utils/cardImages';
 
 const Card = ({value, onTable, isActivePlayer, isHidden, isSelectable, playCard, getCardBack}) => {
   const image = isHidden ? images['BLUE_BACK'] : images[value];

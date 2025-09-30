@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .commands {
-  @include until($tablet) {
+  @media screen and (max-width: 599px) {
     .section {
       padding: 1rem 0;
     }
@@ -10,7 +10,7 @@
 
 .wrapper {
   max-width: 100%;
-  @include mobile {
+  @media screen and (max-width: 768px) {
     width: 100%;
   }
 }
@@ -29,7 +29,7 @@
 
 .waiting {
   .title {
-    @include desktop {
+    @media screen and (min-width: 1024px) {
       margin-bottom: 4rem;
     }
   }
@@ -41,7 +41,7 @@ ul.players-waiting-list {
   margin-top: 1rem;
   // margin-bottom: 1rem;
   min-height: 10rem;
-  @include tablet {
+  @media screen and (min-width: 769px) {
     margin-top: 3rem;
     width: 30rem;
     min-height: 15rem;

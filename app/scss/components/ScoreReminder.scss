@@ -15,11 +15,11 @@
     }
   }
 
-  @include desktop {
+  @media screen and (min-width: 1024px) {
     margin-right: 5rem;
   }
 
-  @include mobile {
+  @media screen and (max-width: 768px) {
     top: 1.3rem;
     left: 0;
     width: 6rem;

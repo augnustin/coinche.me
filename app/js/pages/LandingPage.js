@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import {localStorageKeys, queryParamToJoin} from '../constants';
 import {selectTableId} from '../redux/selectors/game'
 
-const LandingPage = ({location, history, tableId: currentTableId}) => {
+const LandingPage = ({tableId: currentTableId}) => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const isJoiningTableId = new URLSearchParams(location.search).get(queryParamToJoin);
 
@@ -29,7 +31,7 @@ const LandingPage = ({location, history, tableId: currentTableId}) => {
       body: `tableId=${tableId}`,
     })
     .then(res => {
-      history.push(res.url.replace(`${window.location.protocol}//${window.location.host}`, ''));
+      navigate(res.url.replace(`${window.location.protocol}//${window.location.host}`, ''));
     })
   };
 

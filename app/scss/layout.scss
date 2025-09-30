@@ -35,7 +35,7 @@ body {
     }
   }
 
-  @include from($tablet) {
+  @media screen and (min-width: 769px) {
     display: block;
     opacity: 0;
 
@@ -54,7 +54,7 @@ body {
     }
   }
 
-  @include mobile {
+  @media screen and (max-width: 768px) {
     position: absolute;
     display: block !important;
     height: 100vh;
@@ -69,7 +69,7 @@ body {
 
 .section {
   &.is-vertical {
-    @include mobile {
+    @media screen and (max-width: 768px) {
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
     }

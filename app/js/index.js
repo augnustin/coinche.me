@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
@@ -12,10 +12,12 @@ import GamePage from './pages/GamePage';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Route exact path="/" component={LandingPage} />
-      <Route exact path="/help" component={HelpPage} />
-      <Route exact path="/config" component={ConfigPage} />
-      <Route exact path="/game/:tableId" component={GamePage} />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/config" element={<ConfigPage />} />
+        <Route path="/game/:tableId" element={<GamePage />} />
+      </Routes>
     </BrowserRouter>
   </Provider>,
   document.getElementById('container')
