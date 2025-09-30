@@ -36,7 +36,9 @@
     "reselect": "^5.1.1",
     "socket.io": "^2.4.1",
     "socket.io-client": "^2.4.1",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "parcel": "^2.16.0",
+    "sass": "^1.79.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -48,8 +50,6 @@
     "buffer": "^6.0.3",
     "concurrently": "^9.2.1",
     "jest": "^30.2.0",
-    "nodemon": "^3.1.4",
-    "parcel": "^2.16.0",
-    "sass": "^1.79.4"
+    "nodemon": "^3.1.4"
   }
 }
