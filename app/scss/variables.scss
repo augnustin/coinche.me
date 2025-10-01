@@ -24,12 +24,10 @@ $yellow: #f1c40f;
 
 $text: $white;
 $text-strong: color.scale($text, $lightness: -5%);
-$title: $white;
 $background: $green;
 $primary: $red;
 $input-color: $black;
 $link: color.scale($white, $lightness: -20%);
-$link-hover: $blue;
 
 $box-background-color: $green;
 $modal-content-width: 100%;

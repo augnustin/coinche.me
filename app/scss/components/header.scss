@@ -1,5 +1,16 @@
 @use "../variables";
 
+nav.navbar {
+  background-color: variables.$navbar-background-color;
+
+  a.navbar-item,
+  .navbar-link {
+    &:hover {
+      background: none;
+    }
+  }
+}
+
 .navbar-item img {
   max-height: 3.75rem;
 }

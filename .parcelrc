@@ -1,6 +1,6 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.md": ["@parcel/transformer-raw"]
+    "*.md": ["@parcel/transformer-inline-string"]
   }
 }
