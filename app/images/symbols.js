@@ -1,7 +1,7 @@
-const HeartSymbol = require('./heart.svg');
-const SpadesSymbol = require('./spades.svg');
-const DiamondSymbol = require('./diamonds.svg');
-const ClubSymbol = require('./clubs.svg');
+import HeartSymbol from "url:./heart.svg";
+import SpadesSymbol from "url:./spades.svg";
+import DiamondSymbol from "url:./diamonds.svg";
+import ClubSymbol from "url:./clubs.svg";
 
 const cardSymbols = {
   H: HeartSymbol,

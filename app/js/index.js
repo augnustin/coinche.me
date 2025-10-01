@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -9,7 +9,10 @@ import LandingPage from './pages/LandingPage';
 import ConfigPage from './pages/ConfigPage';
 import GamePage from './pages/GamePage';
 
-ReactDOM.render(
+const container = document.getElementById('container');
+const root = createRoot(container);
+
+root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
@@ -19,6 +22,5 @@ ReactDOM.render(
         <Route path="/game/:tableId" element={<GamePage />} />
       </Routes>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('container')
+  </Provider>
 );

@@ -25,8 +25,8 @@ export const selectHumanPlayers = createSelector(
 );
 
 export const selectPlayerByPosition = createSelector(
-  [selectPlayers],
-  players => position => players.find(player => player.position === position)
+  [selectPlayers, (state, position) => position],
+  (players, position) => players.find(player => player.position === position)
 )
 
 export const selectCurrentPlayer = createSelector(
@@ -56,7 +56,10 @@ export const selectIsLastTrick = createSelector(
 
 export const selectOnTable = createSelector(
   [selectPlayers],
-  players => players.filter(p => p.onTable).map(p => ({value: p.onTable, position: p.position}))
+  players => {
+    const playersOnTable = players.filter(p => p.onTable);
+    return playersOnTable.map(p => ({value: p.onTable, position: p.position}));
+  }
 );
 
 export const selectCanCollect = createSelector(
@@ -71,18 +74,31 @@ export const selectLastTrick = createSelector(
 
 export const selectTeams = createSelector(
   [selectPlayers],
-  players => partition(players.map(p => p.id), (p, i) => i%2)
+  players => {
+    const playerIds = players.map(p => p.id);
+    return partition(playerIds, (p, i) => i%2);
+  }
 )
 
 export const selectTricksByTeam = createSelector(
   [selectTricks, selectCurrentPlayer],
-  (tricks, currentPlayer) => tricks.reduce(([us, others], t) => {
-    const isCurrentPlayerTeam = (t.playerIndex % 2) === (currentPlayer.index % 2)
-    return [
-      us.concat(isCurrentPlayerTeam ? t : []),
-      others.concat(isCurrentPlayerTeam ? [] : t),
-    ]
-  }, [[], []])
+  (tricks, currentPlayer) => {
+    if (!currentPlayer) return [[], []];
+    
+    const us = [];
+    const others = [];
+    
+    tricks.forEach(t => {
+      const isCurrentPlayerTeam = (t.playerIndex % 2) === (currentPlayer.index % 2);
+      if (isCurrentPlayerTeam) {
+        us.push(t);
+      } else {
+        others.push(t);
+      }
+    });
+    
+    return [us, others];
+  }
 )
 
 export const selectPartner = createSelector(
@@ -92,10 +108,13 @@ export const selectPartner = createSelector(
 
 export const selectCurrentDeclaration = createSelector(
   [selectDeclarationsHistory],
-  (declarationsHistory) => last(declarationsHistory.filter(d => (d.type !== declarationTypes.PASS) && (d.type !== declarationTypes.COINCHE)))
+  (declarationsHistory) => {
+    const validDeclarations = declarationsHistory.filter(d => (d.type !== declarationTypes.PASS) && (d.type !== declarationTypes.COINCHE));
+    return last(validDeclarations);
+  }
 )
 
 export const selectIsCoinched = createSelector(
 	[selectDeclarationsHistory],
-	(declarationsHistory) => declarationsHistory.filter(d => d.type === declarationTypes.COINCHE),
+	(declarationsHistory) => declarationsHistory.filter(d => d.type === declarationTypes.COINCHE)
 );

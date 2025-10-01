@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Link } from "react-router-dom";
@@ -7,62 +7,66 @@ import { undo, distribute, reset } from "../redux/actions/socketActions";
 import { toggleIsLastTrickVisible } from "../redux/actions/localActions";
 import { isArray, isFunction } from "../../../shared/utils/boolean";
 import { selectCurrentPlayer, selectNbPlayers, selectTableId } from "../redux/selectors/game";
-import LogoImage from "../../images/logo.png";
+import Logo from "url:../../images/logo.png";
 
 const Header = ({ currentPlayer, nbPlayers, distribute, undo, toggleIsLastTrickVisible, tableId, reset }) => {
   const [menuShown, showMenu] = useState(false);
 
   const toggleMenu = (e) => showMenu(!menuShown);
 
-  const menu = [
-    {
-      label: "Comment ça marche ?",
-      to: "/help",
-    },
-    {
-      label: "Paramètres",
-      to: "/config",
-    },
-  ].concat(
-    tableId
-      ? [
-          {
-            label: "Partie en cours",
-            to: `/game/${tableId}`,
-            dropdown: [
-              {
-                label: "Revoir le dernier pli",
-                onClick: (e) => {
+  const menu = useMemo(() => {
+    const baseMenu = [
+      {
+        label: "Comment ça marche ?",
+        to: "/help",
+      },
+      {
+        label: "Paramètres",
+        to: "/config",
+      },
+    ];
+
+    if (tableId) {
+      return baseMenu.concat([
+        {
+          label: "Partie en cours",
+          to: `/game/${tableId}`,
+          dropdown: [
+            {
+              label: "Revoir le dernier pli",
+              onClick: (e) => {
+                // toggleMenu();
+                toggleIsLastTrickVisible();
+              },
+            },
+            {
+              label: "Annuler l'action précédente",
+              onClick: (e) => undo(),
+            },
+            {
+              label: "Redistribuer",
+              onClick: (e) => {
+                if (window.confirm("Es-tu sûr⸱e de vouloir abandonner la partie en cours ?")) {
+                  distribute(currentPlayer?.id);
+                }
+              },
+            },
+            {
+              label: "Hard reset : si tout est planté :(",
+              onClick: (e) => {
+                if (window.confirm("On repart à zéro ?")) {
                   // toggleMenu();
-                  toggleIsLastTrickVisible();
-                },
+                  reset();
+                }
               },
-              {
-                label: "Annuler l'action précédente",
-                onClick: (e) => undo(),
-              },
-              {
-                label: "Redistribuer",
-                onClick: (e) => {
-                  if (window.confirm("Es-tu sûr⸱e de vouloir abandonner la partie en cours ?")) {
-                    distribute(currentPlayer.id);
-                  }
-                },
-              },
-              {
-                label: "Hard reset : si tout est planté :(",
-                onClick: (e) => {
-                  if (window.confirm("On repart à zéro ?")) {
-                    // toggleMenu();
-                    reset();
-                  }
-                },
-              },
-            ],
-          },
-        ]
-      : []
-  );
+            },
+          ],
+        },
+      ]);
+    }
+
+    return baseMenu;
+  }, [tableId, currentPlayer?.id, distribute, undo, toggleIsLastTrickVisible, reset]);
 
   const renderMenuEntry = (entry, i) => {
     if (isArray(entry.dropdown)) {
@@ -101,7 +105,7 @@ const Header = ({ currentPlayer, nbPlayers, distribute, undo, toggleIsLastTrickV
     <nav className="navbar is-fixed-top is-spaced" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item">
-          <img src={LogoImage} alt="Coinche.me Logo" />
+          <img src={Logo} alt="Coinche.me Logo" />
           <h1 className="is-hidden-mobile">Coinche.me</h1>
         </Link>
 

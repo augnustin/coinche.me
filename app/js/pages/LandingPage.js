@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -59,18 +59,23 @@ const LandingPage = ({tableId: currentTableId}) => {
     <p key="or" className="section is-vertical has-text-centered">- OU -</p>
   )
 
-  const possibleActions = () => {
+  const possibleActions = useMemo(() => {
     if (isJoiningTableId) return tableInput('On t\'attend pour jouer sur cette table :');
-    return (currentTableId ? [
-      tableInput('Reprendre ta partie en cours :'),
-      orAction,
-      createNewTable("Créer une nouvelle table"),
-    ] : [
+    
+    if (currentTableId) {
+      return [
+        tableInput('Reprendre ta partie en cours :'),
+        orAction,
+        createNewTable("Créer une nouvelle table"),
+      ];
+    }
+    
+    return [
       createNewTable("Créer une table"),
       orAction,
       tableInput(),
-    ])
-  }
+    ];
+  }, [isJoiningTableId, currentTableId, tableId]);
 
   return (
     <Layout mode="container">
@@ -90,7 +95,7 @@ const LandingPage = ({tableId: currentTableId}) => {
           </div>
         </div>
         <div className="section is-vertical">
-          {possibleActions()}
+          {possibleActions}
         </div>
       </form>
     </Layout>
