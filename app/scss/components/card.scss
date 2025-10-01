@@ -1,4 +1,4 @@
-@import '../variables';
+@use "../variables";
 
 .card-wrapper {
   position: relative;
@@ -8,13 +8,13 @@
 
 img.playing-card {
   position: absolute;
-  width: $card_width;
-  height: $card_height;
+  width: variables.$card_width;
+  height: variables.$card_height;
   max-width: none;
-	margin: -$card_width/2;
-	padding: 0;
-	border: 0;
-	vertical-align: initial;
+  margin: -1 * variables.$card_width/2;
+  padding: 0;
+  border: 0;
+  vertical-align: initial;
   box-sizing: initial;
   transition: ease 0.1s transform;
   &.is-selectable {
@@ -22,10 +22,10 @@ img.playing-card {
     &:hover {
       z-index: 1;
       .hand & {
-        transform: translateY(-$card_space);
+        transform: translateY(-1 * variables.$card_space);
       }
       .table-slot & {
-        transform: translateY($card_space/2);
+        transform: translateY(variables.$card_space/2);
       }
     }
   }

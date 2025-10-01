@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@use "../variables";
 
 .score-container {
   position: absolute;
@@ -9,7 +9,7 @@
 
   .score-table {
     background: none;
-    color: $text;
+    color: variables.$text;
     td {
       text-align: center;
     }
@@ -34,5 +34,4 @@
       }
     }
   }
-
 }

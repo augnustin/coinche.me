@@ -1,5 +1,9 @@
-@use 'sass:math';
-@use 'sass:color';
+// Forward built-in modules to make them available to other files
+@forward "sass:math";
+@forward "sass:color";
+
+@use "sass:math";
+@use "sass:color";
 
 $card_ratio: 1.39375;
 // $card_width: 8rem;
@@ -10,12 +14,11 @@ $card_space: math.div($card_width, 4);
 
 $tablet: 600px;
 $widescreen: 1216px;
-$navbar-height: 3.25rem;
 
 $white: white;
 $black: black;
 $red: #d40000;
-$green: #02731E;
+$green: #02731e;
 $blue: #131f67;
 $yellow: #f1c40f;
 
@@ -30,16 +33,17 @@ $link-hover: $blue;
 $box-background-color: $green;
 $modal-content-width: 100%;
 
+$navbar-height: 3.25rem;
 $navbar-background-color: transparent;
 $navbar-breakpoint: 10000px;
 $navbar-item-color: $white;
 $navbar-item-hover-color: color.scale($white, $lightness: -10%);
 $radius: 2rem;
 $easing: ease-in-out;
-$duration: .4s;
+$duration: 0.4s;
 
 $table-color: hsl(0, 0%, 21%);
 $table-background-color: $background;
 $table-striped-row-even-background-color: hsl(0, 0%, 98%);
 
-@import 'mixins';
+@import "mixins";

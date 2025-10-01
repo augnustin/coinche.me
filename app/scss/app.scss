@@ -1,6 +1,19 @@
-@import 'variables';
+@use "variables";
 
-@import '~bulma/bulma';
-@import 'sections';
+@use "bulma/sass" as bulma with (
+  $family-primary: '"Nunito", sans-serif',
+  $white: variables.$white,
+  $black: variables.$black,
+  $primary: variables.$primary,
+  $text: variables.$text,
+  $text-strong: variables.$text-strong,
+  $background: variables.$background,
+  $navbar-background-color: variables.$navbar-background-color,
+  $link: variables.$link,
+  $radius: variables.$radius,
+  $tablet: variables.$tablet,
+  $widescreen: variables.$widescreen
+);
 
-@import 'layout';
+@use "sections";
+@use "layout";

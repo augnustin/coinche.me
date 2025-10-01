@@ -1,9 +1,9 @@
-@import '../variables';
+@use "../variables";
 
 .navbar-item img {
   max-height: 3.75rem;
 }
 
 .navbar-burger:hover span {
-  background-color: $navbar-item-hover-color;
+  background-color: variables.$navbar-item-hover-color;
 }

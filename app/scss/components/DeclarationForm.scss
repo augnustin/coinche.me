@@ -1,7 +1,7 @@
-@import '../variables';
+@use '../variables';
 
 .declaration {
-	@include table-space();
+	@include variables.table-space();
 	margin-bottom: 0;
 	text-align: center;
 	display: flex;
@@ -13,7 +13,7 @@
 		opacity: 0.4;
 	}
 	.headers {
-		@include compact-mode() {
+		@include variables.compact-mode() {
 			display: none;
 		}
 		.title {
@@ -26,7 +26,7 @@
 	}
 
 	.field.all-options {
-		@include compact-mode() {
+		@include variables.compact-mode() {
 			display: block;
 			margin: auto;
 

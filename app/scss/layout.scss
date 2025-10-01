@@ -1,3 +1,5 @@
+@use 'variables';
+
 html {
   overflow-x: auto;
   min-width: 360px;
@@ -5,7 +7,7 @@ html {
 }
 
 body {
-  @include background();
+  @include variables.background();
   // min-height: 100vh;
   // background: url(../images/leather_1.png);
   // background-color: $background;
@@ -28,10 +30,10 @@ body {
   background-color: rgba($color: #000000, $alpha: 0.2);
   background: rgba(white, 0.8) !important;
   a {
-    color: $black;
+    color: variables.$black;
     &:hover {
       background-color: white !important;
-      color: $black !important;
+      color: variables.$black !important;
     }
   }
 
@@ -44,7 +46,7 @@ body {
     right: 0;
 
     transform: translateY(-50%);
-    transition: all $duration $easing;
+    transition: all variables.$duration variables.$easing;
     pointer-events: none;
 
     &.is-active {
@@ -60,7 +62,7 @@ body {
     height: 100vh;
     right: 100%;
     width: 100%;
-    transition: right $duration $easing;
+    transition: right variables.$duration variables.$easing;
     &.is-active {
       right: 0;
     }
@@ -77,13 +79,13 @@ body {
 
   &.is-main {
     height: 100vh;
-    padding-top: $navbar-height + 1rem;
+    padding-top: variables.$navbar-height + 1rem;
   }
 
   &.is-full-screen {
     height: 100vh;
     padding: 1rem;
-    padding-top: $navbar-height + 1.5rem;
+    padding-top: variables.$navbar-height + 1.5rem;
     // @include mobile {
     //   padding-top: $navbar-height + 0.5rem;
 
@@ -110,7 +112,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
-  max-width: $widescreen;
+  max-width: variables.$widescreen;
   margin: auto;
   > .level:not(:last-child) {
     margin-bottom: 0;

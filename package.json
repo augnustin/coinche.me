@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "cleanup": "rm -rf .cache dist build",
-    "watch-app": "parcel serve app/index.html --dist-dir build --port 1234",
+    "watch-app": "parcel watch app/index.html --dist-dir build --no-hmr",
     "watch-server": "nodemon --watch server server/index.js",
     "dev": "concurrently \"npm run watch-app\" \"npm run watch-server\"",
     "build": "parcel build app/index.html --dist-dir build --public-url ./",
@@ -38,16 +38,16 @@
     "socket.io-client": "^2.4.1",
     "uuid": "^13.0.0",
     "parcel": "^2.16.0",
+    "buffer": "^6.0.3",
+    "@parcel/packager-raw-url": "^2.16.0",
+    "@parcel/transformer-sass": "^2.16.0",
+    "@parcel/transformer-webmanifest": "^2.16.0",
     "sass": "^1.79.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
-    "@parcel/packager-raw-url": "^2.16.0",
-    "@parcel/transformer-sass": "^2.16.0",
-    "@parcel/transformer-webmanifest": "^2.16.0",
-    "buffer": "^6.0.3",
     "concurrently": "^9.2.1",
     "jest": "^30.2.0",
     "nodemon": "^3.1.4"

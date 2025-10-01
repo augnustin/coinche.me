@@ -23,14 +23,12 @@ const io = socketio(server);
 const isProduction = app.get("env") === "production";
 const PORT = process.env.PORT || 3000;
 
-if (isProduction) {
-  app.set("trust proxy", 1);
-  app.use(express.static("build"));
-  app.use(express.static("public"));
-  // app.get("/*", async (req, res) => {
-  //   res.sendFile("build/index.html", { root: `${__dirname}/..` });
-  // });
-}
+app.set("trust proxy", 1);
+app.use(express.static("build"));
+app.use(express.static("public"));
+app.get("/*", async (req, res) => {
+  res.sendFile("build/index.html", { root: `${__dirname}/..` });
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(

@@ -1,16 +1,16 @@
-@import '../variables';
+@use '../variables';
 
 .hand {
-	padding: $card_width / 2;
+	padding: variables.$card_width / 2;
 	margin: auto;
   display: flex;
   width: 100%;
-  max-width: 9*$card_width;
-  height: $card_height;
+  max-width: 9*variables.$card_width;
+  height: variables.$card_height;
   flex-flow: row nowrap;
   justify-content: space-around;
   &.is-compact {
-    max-width: 3*$card_width;
+    max-width: 3*variables.$card_width;
     margin: auto;
   }
   &.with-tricks {
@@ -19,7 +19,7 @@
 
   .trick {
     display: flex;
-    width: 1.5*$card_width;
+    width: 1.5*variables.$card_width;
     justify-content: space-around;
     margin-bottom: 3rem;
     &:nth-child(even) {

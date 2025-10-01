@@ -1,7 +1,7 @@
-@import '../variables';
+@use '../variables';
 
 .playing-table {
-  @include table-space();
+  @include variables.table-space();
   // position: relative;
   // height: 2 * ($card_height + $card_space);
   // width: 100%;
@@ -22,8 +22,8 @@
     left: 0;
     right: 0;
     margin: auto;
-    width: $card_width;
-    height: $card_height;
+    width: variables.$card_width;
+    height: variables.$card_height;
 
     .card-wrapper {
       width: auto;

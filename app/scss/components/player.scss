@@ -1,4 +1,4 @@
-@import '../variables';
+@use '../variables';
 
 .player {
   &.is-north, &.is-south {
@@ -19,7 +19,7 @@
     }
   }
 
-  @include compact-mode() {
+  @include variables.compact-mode() {
     $name-width: 50vh;
     &:not(.is-south) {
       .hand {

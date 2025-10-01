@@ -1,4 +1,4 @@
-@import '../variables';
+@use "../variables";
 
 .tip {
   position: relative;
@@ -21,8 +21,8 @@
     overflow: hidden;
     position: absolute;
     z-index: 100;
-    background: $yellow;
-    color: $black;
+    background: variables.$yellow;
+    color: variables.$black;
     border-radius: 5px;
     width: 250px;
     margin-bottom: 0.5rem;
@@ -38,7 +38,7 @@
     //   bottom: 0;
     //   content: '';
     //   transform: rotate(45deg);
-    //   background: $yellow;
+    //   background: variables.$yellow;
     // }
 
     p {
