@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@parcel/packager-raw-url": "^2.16.0",
+    "@parcel/transformer-inline-string": "^2.16.0",
     "@parcel/transformer-sass": "^2.16.0",
     "@parcel/transformer-webmanifest": "^2.16.0",
-    "@parcel/transformer-inline-string": "^2.16.0",
     "body-parser": "^1.20.3",
     "buffer": "^6.0.3",
     "bulma": "^1.0.2",
@@ -41,8 +41,8 @@
     "redux-logger": "^3.0.6",
     "reselect": "^5.1.1",
     "sass": "^1.79.4",
-    "socket.io": "^2.4.1",
-    "socket.io-client": "^2.4.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
