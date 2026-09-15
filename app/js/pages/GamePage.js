@@ -1,14 +1,12 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { Navigate, useParams } from 'react-router-dom';
 import { subscribeServerUpdate, unsubscribeServerUpdate } from '../redux/actions/socketActions';
-import {selectGameId} from '../redux/selectors/game'
 import Layout from '../components/Layout';
 import Game from '../components/Game';
 import {localStorageKeys} from '../constants';
 
-const GamePage = ({gameId, subscribeServerUpdate, unsubscribeServerUpdate}) => {
+const GamePage = ({subscribeServerUpdate, unsubscribeServerUpdate}) => {
   const { tableId } = useParams();
   if (!tableId) return (
     <Navigate to="/" replace />
@@ -34,7 +32,7 @@ const GamePage = ({gameId, subscribeServerUpdate, unsubscribeServerUpdate}) => {
     // return () => {
     //   // unsubscribeServerUpdate(tableId);
     // }
-  }, [gameId]);
+  }, [tableId, username]);
 
   return (
     <Layout>
@@ -43,14 +41,9 @@ const GamePage = ({gameId, subscribeServerUpdate, unsubscribeServerUpdate}) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  gameId: selectGameId,
-});
-
-
 const mapDispatchToProps = {
   subscribeServerUpdate,
   unsubscribeServerUpdate
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
+export default connect(null, mapDispatchToProps)(GamePage);

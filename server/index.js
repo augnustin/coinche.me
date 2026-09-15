@@ -24,12 +24,15 @@ const isProduction = app.get("env") === "production";
 const PORT = process.env.PORT || 3000;
 
 app.set("trust proxy", 1);
-app.use(express.static("build"));
-app.use(express.static("public"));
-app.get("/*", async (req, res) => {
-  res.sendFile("build/index.html", { root: `${__dirname}/..` });
-});
 
+// Session must be registered before the static/catch-all handlers below.
+// Express runs middleware in registration order, and the catch-all matches
+// every GET request (including the very first page load of any route, e.g.
+// a shared /game/:tableId link) — if session() were registered after it, no
+// GET request would ever receive a session cookie, and only the POST /join
+// endpoint would. That left every visitor who lands directly on a game link
+// (rather than going through the join form first) with no connect.sid cookie,
+// so the server resolved their playerId as undefined for their entire session.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
@@ -40,9 +43,16 @@ app.use(
   })
 );
 
+app.use(express.static("build"));
+app.use(express.static("public"));
+
 app.post("/join", async (req, res) => {
   const tableId = req.body.tableId || uuid();
   res.redirect(`/game/${tableId}`);
+});
+
+app.get("/*", async (req, res) => {
+  res.sendFile("build/index.html", { root: `${__dirname}/..` });
 });
 
 const dispatchActionAndBroadcastNewState = async (tableId, action) => {
@@ -57,9 +67,14 @@ const dispatchActionAndBroadcastNewState = async (tableId, action) => {
 
 try {
   io.on("connection", (socket) => {
+    // Falling back to socket.id (instead of leaving playerId undefined) matters
+    // when a visitor has no connect.sid cookie for any reason (cookies blocked,
+    // misconfigured SESSION_KEY, etc.): without it, every such visitor would
+    // resolve to the same `undefined` playerId and silently collide onto the
+    // same seat, since the JOIN reducer matches players by `p.id === playerId`.
     const playerId = process.env.IGNORE_COOKIE
       ? uuid()
-      : cookie.parse(socket.handshake.headers.cookie || "")["connect.sid"];
+      : cookie.parse(socket.handshake.headers.cookie || "")["connect.sid"] || socket.id;
     console.log("New socket connection", socket.id, playerId);
 
     socket.on(socketEvents.JOIN, async ({ tableId, username }) => {

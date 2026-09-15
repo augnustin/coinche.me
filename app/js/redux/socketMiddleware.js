@@ -22,6 +22,11 @@ export default function socketMiddleware() {
     const { listenSocketEvent, stopListeningSocketEvent, dispatchOnSocketEvent, emit: socketEvent, payload } = action;
 
     if (listenSocketEvent && dispatchOnSocketEvent) {
+      // Guard against stacking duplicate listeners: if this action is
+      // dispatched more than once for the same event (e.g. a component
+      // effect re-running), drop any previous listener first so the server
+      // broadcast doesn't get dispatched into the store multiple times.
+      socket.off(listenSocketEvent);
       socket.on(listenSocketEvent, socketPayload => {
         dispatch({ type: dispatchOnSocketEvent, payload: socketPayload })
       });
