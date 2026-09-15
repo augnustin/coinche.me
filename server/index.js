@@ -1,7 +1,7 @@
 import http from "http";
 import express from "express";
 import bodyParser from "body-parser";
-import cookie from "cookie";
+import { parseCookie } from "cookie";
 import session from "express-session";
 import { Server } from "socket.io";
 import { v4 as uuid } from "uuid";
@@ -51,7 +51,9 @@ app.post("/join", async (req, res) => {
   res.redirect(`/game/${tableId}`);
 });
 
-app.get("/*", async (req, res) => {
+// Express 5's router (path-to-regexp v8) requires wildcard route parameters
+// to be named — a bare "/*" now throws at registration time.
+app.get("/*splat", async (req, res) => {
   res.sendFile("build/index.html", { root: `${__dirname}/..` });
 });
 
@@ -74,7 +76,7 @@ try {
     // same seat, since the JOIN reducer matches players by `p.id === playerId`.
     const playerId = process.env.IGNORE_COOKIE
       ? uuid()
-      : cookie.parse(socket.handshake.headers.cookie || "")["connect.sid"] || socket.id;
+      : parseCookie(socket.handshake.headers.cookie || "")["connect.sid"] || socket.id;
     console.log("New socket connection", socket.id, playerId);
 
     socket.on(socketEvents.JOIN, async ({ tableId, username }) => {
