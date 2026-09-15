@@ -3,7 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookie from "cookie";
 import session from "express-session";
-import socketio from "socket.io";
+import { Server } from "socket.io";
 import { v4 as uuid } from "uuid";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const server = http.Server(app);
-const io = socketio(server);
+const io = new Server(server);
 const isProduction = app.get("env") === "production";
 const PORT = process.env.PORT || 3000;
 

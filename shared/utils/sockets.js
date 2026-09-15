@@ -1,11 +1,10 @@
-export const emitEachInRoom = (io, roomId, event, getData) => {
-  io.to(roomId).clients((error, clients) => {
-    if (error) {
-      console.error('Error getting clients:', error);
-      return;
-    }
-    clients.forEach(clientId => {
-      io.to(clientId).emit(event, getData(clientId));
+export const emitEachInRoom = async (io, roomId, event, getData) => {
+  try {
+    const sockets = await io.in(roomId).fetchSockets();
+    sockets.forEach(socket => {
+      socket.emit(event, getData(socket.id));
     });
-  });
+  } catch (error) {
+    console.error('Error emitting to room:', error);
+  }
 }
