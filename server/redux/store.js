@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 }
 
 const redisURL = "redis://redis";
-const redisInstance = new Redis(redisURL);
+export const redisInstance = new Redis(redisURL);
 
 // Every table is a Redis key with no natural owner and no account behind it —
 // without an expiry, a table created once (even accidentally, or by a

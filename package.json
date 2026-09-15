@@ -17,7 +17,8 @@
     "build": "parcel build app/index.html --dist-dir build --public-url ./",
     "server": "node server/index.js",
     "start": "npm install && npm run build && npm run server",
-    "test": "jest --watch *.test.js"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
   },
   "dependencies": {
     "@parcel/packager-raw-url": "^2.16.0",
